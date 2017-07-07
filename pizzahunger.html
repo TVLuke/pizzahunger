@@ -1,0 +1,43 @@
+<html>
+<head>
+  <script>
+  function vormerken_send () {
+
+    var m = document.getElementById("message").value;
+
+    var mm = {};
+
+    mm["message"]=m;
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.open("POST", "http://localhost:17799/messages", true);
+    xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+
+    // send the collected data as JSON
+    xhr.send(JSON.stringify(mm));
+
+    xhr.onloadend = function () {
+      document.getElementById("message").value = "";
+    };
+
+    window.onload = function () {
+      document.getElementById("bmi").value = bmi;
+    };
+  }
+
+  document.getElementById("vormerken").onclick = vormerken_send;
+  </script>
+</head>
+<body>
+  <center>
+    <a href="fritz.nobreakspace.org:3030/pizza">FRITZ:PIZZA</a>
+    <h2>Heute bock auf Essen im #nbsp?</h2>
+    <form>
+      <label for="message">Vormerken:
+        <input id="message" name="message" length="300"></label>
+      <button type="button" onclick="vormerken_send()">vormerken</button>
+    </form>
+  </center>
+</body>
+</html>
